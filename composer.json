@@ -1,0 +1,31 @@
+{
+    "name": "lechuganegra/privkeymanager",
+    "description": "Paquete de autenticación con JWT para Laravel.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Marco Torres",
+            "email": "marquillo01@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LechugaNegra\\PrivKeyManager\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.1",
+        "php-open-source-saver/jwt-auth": "^2.8",
+        "illuminate/support": "^11.0"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LechugaNegra\\PrivKeyManager\\Providers\\PrivKeyManagerProvider"
+            ]
+        }
+    },
+    "version": "1.0.0"
+}
