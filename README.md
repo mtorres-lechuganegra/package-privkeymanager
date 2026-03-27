@@ -4,10 +4,9 @@ Este paquete de Laravel proporciona un sistema de autenticación JWT para llaves
 
 ## Características Principales
 
-* **Autenticación JWT:** Utiliza JSON Web Tokens (JWT) para una autenticación segura y sin estado.
-* **Inicio de Sesión:** Proceso de inicio de sesión completo con generación de tokens JWT.
-* **Middleware de Autenticación:** Middleware para proteger rutas y asegurar que solo usuarios autenticados puedan acceder.
-* **Endpoint de validación de token:** Endpoint para validar token de autenticación, su objetivo es para uso de microservicio.
+* **Generación de API Key:** Comando Artisan para crear registros de llaves privadas con expiración y restricción de URL opcionales.
+* **Autenticación JWT:** Endpoint que utiliza JSON Web Tokens (JWT) para una autenticación segura y sin estado.
+* **Middleware de Autenticación:** Middleware para proteger rutas y asegurar que solo consumidores autorizados puedan acceder.
 
 ## Instalación
 
