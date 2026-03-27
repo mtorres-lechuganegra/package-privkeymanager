@@ -43,7 +43,7 @@ Este paquete de Laravel proporciona un sistema de autenticación JWT para llaves
         "repositories": [
             {
                 "type": "path",
-                "url": "packages/lechuganegra/PrivKeyManager"
+                "url": "packages/lechuganegra/privkeymanager"
             }
         ]
     }
@@ -54,7 +54,7 @@ Este paquete de Laravel proporciona un sistema de autenticación JWT para llaves
     {
         "autoload": {
             "psr-4": {
-                "LechugaNegra\\PrivKeyManager\\": "packages/lechugaNegra/PrivKeyManager/src/"
+                "LechugaNegra\\PrivKeyManager\\": "packages/lechugaNegra/privkeymanager/src/"
             }
         }
     }
@@ -65,7 +65,7 @@ Este paquete de Laravel proporciona un sistema de autenticación JWT para llaves
     Después de editar tu archivo, abre tu terminal y ejecuta el siguiente comando para agregar el paquete a las dependencias de tu proyecto:
 
     ```bash
-    composer require lechuganegra/PrivKeyManager:@dev
+    composer require lechuganegra/privkeymanager:@dev
     ```
 
     Este comando descargará el paquete y actualizará tu archivo `composer.json`.
