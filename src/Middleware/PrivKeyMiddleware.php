@@ -23,6 +23,27 @@ class PrivKeyMiddleware
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
 
+            // Si es unrestricted, pasa sin validar grupos
+            if ($privKey->isUnrestricted()) {
+                return $next($request);
+            }
+
+            // Valida que la ruta actual esté en algún grupo asignado a la key
+            $routeName = $request->route()->getName();
+
+            if (!$routeName) {
+                return response()->json(['error' => 'Forbidden — route has no name'], 403);
+            }
+
+            $hasAccess = $privKey->groups
+                ->flatMap->routes
+                ->pluck('route_name')
+                ->contains($routeName);
+
+            if (!$hasAccess) {
+                return response()->json(['error' => 'Forbidden'], 403);
+            }
+
         } catch (\Exception $e) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }

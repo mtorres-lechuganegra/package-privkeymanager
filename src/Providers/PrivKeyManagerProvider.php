@@ -25,6 +25,9 @@ class PrivKeyManagerProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \LechugaNegra\PrivKeyManager\Console\Commands\CreatePrivKey::class,
+                \LechugaNegra\PrivKeyManager\Console\Commands\CreatePrivKeyGroup::class,
+                \LechugaNegra\PrivKeyManager\Console\Commands\AddRouteToPrivKeyGroup::class,
+                \LechugaNegra\PrivKeyManager\Console\Commands\AssignGroupToPrivKey::class,
             ]);
         }
 
