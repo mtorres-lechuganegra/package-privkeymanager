@@ -4,8 +4,9 @@ Este paquete de Laravel proporciona un sistema de autenticación JWT para llaves
 
 ## Características Principales
 
-* **Generación de API Key:** Comando Artisan para crear registros de llaves privadas con expiración y restricción de URL opcionales.
+* **Generación de API Key:** Comando Artisan para crear registros de llaves privadas con tipo, expiración y restricción de URL opcionales.
 * **Autenticación JWT:** Endpoint que utiliza JSON Web Tokens (JWT) para una autenticación segura y sin estado.
+* **Control de acceso por grupos:** Sistema de grupos y rutas para restringir el acceso de cada API Key a endpoints específicos.
 * **Middleware de Autenticación:** Middleware para proteger rutas y asegurar que solo consumidores autorizados puedan acceder.
 
 ## Instalación
@@ -20,7 +21,7 @@ Este paquete de Laravel proporciona un sistema de autenticación JWT para llaves
     ```
 
     Crear el grupo de carpetas dentro de la carpeta creada, e ingresar a l carpeta:
-    
+
     ```bash
     mkdir lechuganegra
     cd lechuganegra
@@ -75,18 +76,19 @@ Este paquete de Laravel proporciona un sistema de autenticación JWT para llaves
     Ejecuta el siguiente comando para generar la clave secreta que se utilizará para firmar los tokens JWT:
 
     ```bash
-        php artisan jwt:secret
+    php artisan jwt:secret
     ```
 
     Este comando agregará la clave secreta a tu archivo `.env`.
 
     > Si el proyecto ya tiene configurado JWT previamente, este paso no es necesario.
+
 6.  **Ejecutar las migraciones:**
 
     Ejecuta las migraciones del paquete para crear las tablas necesarias en la base de datos:
 
     ```bash
-    php artisan migrate --path=packages/lechuganegra/PrivKeyManager/src/Database/Migrations
+    php artisan migrate --path=packages/lechuganegra/privkeymanager/src/Database/Migrations
     ```
 
 7.  **Limpiar la caché:**
@@ -99,7 +101,7 @@ Este paquete de Laravel proporciona un sistema de autenticación JWT para llaves
     php artisan route:clear
     php artisan route:cache
     ```
-    
+
 8.  **Regenerar clases:**
 
     Regenerar las clases con el cargador automático "autoload"
@@ -116,28 +118,51 @@ Puede importar el archivo `postman_collection.json` que se ubica en la carpeta `
 
 ### Comando de creación de llave
 
-Solo la key
-
+Solo la key (tipo `restricted` por defecto)
 ```bash
 php artisan privkey:create
 ```
 
-Con expiración
+Con tipo unrestricted
+```bash
+php artisan privkey:create --type=unrestricted
+```
 
+Con expiración
 ```bash
 php artisan privkey:create --expires_at="2026-12-31 23:59:59"
 ```
 
 Con referer
-
 ```bash
 php artisan privkey:create --referer_url="https://app.cientifica.edu.pe"
 ```
 
 Con ambos
-
 ```bash
 php artisan privkey:create --expires_at="2026-12-31 23:59:59" --referer_url="https://app.cientifica.edu.pe"
+```
+
+### Comando de gestión de grupos
+
+Crear un grupo
+```bash
+php artisan privkey:group:create --name="comercial"
+```
+
+Con descripción
+```bash
+php artisan privkey:group:create --name="comercial" --description="Rutas del squad comercial"
+```
+
+Agregar una ruta a un grupo
+```bash
+php artisan privkey:group:add-route --group="comercial" --route="api.students.list"
+```
+
+Asignar un grupo a una key
+```bash
+php artisan privkey:key:assign-group --key="a3f8c2e9..." --group="comercial"
 ```
 
 ### Middleware de Autenticación
